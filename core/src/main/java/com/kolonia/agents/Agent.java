@@ -29,29 +29,6 @@ public class Agent {
         setRandomTarget(maxX, maxY);
     }
 
-//    public void update(float delta, List<Agent> allAgents) {
-//        if (isPathFinished()) return;
-//
-//        Node targetNode = path.get(pathIndex);
-//        Vector2 target = new Vector2(targetNode.getX(), targetNode.getY());
-//
-//        Vector2 desired = target.cpy().sub(x, y);
-//        float dist = desired.len();
-//
-//        if (dist < 0.2f) {
-//            pathIndex++;
-//            return;
-//        }
-//
-//        desired.nor().scl(speed);
-//
-//        Vector2 steering = desired.sub(velocity).scl(turnRate * delta);
-//        velocity.add(steering);
-//
-//        x += velocity.x * delta;
-//        y += velocity.y * delta;
-//    }
-
     public void update(float delta, List<Agent> allAgents) {
         if (path == null || pathIndex >= path.size()) return;
 
@@ -125,34 +102,6 @@ public class Agent {
         return path == null || pathIndex >= path.size();
     }
 
-//    private Vector2 computeSeparation(List<Agent> allAgents) {
-//        Vector2 force = new Vector2();
-//        int count = 0;
-//
-//        for (Agent other : allAgents) {
-//            if (other == this) continue;
-//
-//            float dx = other.x - this.x;
-//            float dy = other.y - this.y;
-//            float dist2 = dx*dx + dy*dy;
-//
-//            if (dist2 < separationRadius * separationRadius && dist2 > 0.0001f) {
-//                float dist = (float)Math.sqrt(dist2);
-//                // wektor OD drugiego agenta
-//                force.x += (this.x - other.x) / dist;
-//                force.y += (this.y - other.y) / dist;
-//                count++;
-//            }
-//        }
-//
-//        if (count > 0) {
-//            force.scl(1f / count);      // uśrednienie
-//            force.nor().scl(separationForce);
-//        }
-//
-//        return force;
-//    }
-
     private Vector2 computeSeparation(List<Agent> allAgents) {
         Vector2 force = new Vector2();
 
@@ -174,7 +123,7 @@ public class Agent {
             }
         }
 
-        return force.scl(20f); // SIŁA ODPYCHANIA
+        return force.scl(10f); // SIŁA ODPYCHANIA
     }
 
 }

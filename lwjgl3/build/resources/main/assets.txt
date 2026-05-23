@@ -1,8 +1,0 @@
-agent.png
-libgdx.png
-maps/map1.txt
-tiles/forest.png
-tiles/grass.png
-tiles/rock.png
-tiles/wall.png
-tiles/water.png

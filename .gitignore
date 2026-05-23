@@ -1,24 +1,42 @@
-# Compiled class file
-*.class
+# === Gradle ===
+.gradle/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
 
-# Log file
+# === IntelliJ IDEA ===
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# === LibGDX assets cache ===
+core/assets/.DS_Store
+lwjgl3/assets/.DS_Store
+
+# === OS junk ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
 *.log
 
-# BlueJ files
-*.ctxt
+# === Java ===
+*.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# === Desktop launcher build ===
+lwjgl3/build/
+lwjgl3/out/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# === Core build ===
+core/build/
+core/out/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# === Android (jeśli kiedyś dodasz) ===
+android/build/
+android/out/
+android/local.properties
+
+# === HTML (jeśli kiedyś dodasz) ===
+html/build/
+html/out/
