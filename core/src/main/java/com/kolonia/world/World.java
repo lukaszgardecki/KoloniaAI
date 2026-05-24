@@ -99,7 +99,7 @@ public class World {
             int y = random.nextInt(height);  // 0 .. height-1
 
             if (!inBounds(x, y)) continue;
-            if (tiles[y][x].getType() != TileType.GRASS) continue;
+            if (tiles[x][y].getType() != TileType.GRASS) continue;
 
             String key = x + "_" + y;
             if (occupied.contains(key))

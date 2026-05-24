@@ -156,16 +156,5 @@ public class WorldScreen implements Screen, InputProcessor {
         return true;
     }
 
-    private void clampCamera() {
-        float halfW = camera.viewportWidth * camera.zoom / 2f;
-        float halfH = camera.viewportHeight * camera.zoom / 2f;
-
-        float mapW = world.getWidth();   // w PIKSELACH
-        float mapH = world.getHeight();  // w PIKSELACH
-
-        camera.position.x = MathUtils.clamp(camera.position.x, halfW, mapW - halfW);
-        camera.position.y = MathUtils.clamp(camera.position.y, halfH, mapH - halfH);
-    }
-
 
 }
