@@ -22,7 +22,7 @@ public class Agent {
     private int pathIndex = 0;
     private boolean extensionGenerated = false;
     private int pathSize = 0;
-    private float separationRadius = 1.5f;   // zasięg „czucia” innych
+    private float separationRadius = 1f;   // zasięg „czucia” innych
     private float separationForce = 10.0f;   // siła odpychania
 
 
@@ -87,6 +87,10 @@ public class Agent {
 
     public List<Node> getPath() {
         return path;
+    }
+
+    public Node getLastNode() {
+        return path.get(path.size() - 1);
     }
 
     public float getSeparationRadius() {

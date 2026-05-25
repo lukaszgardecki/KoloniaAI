@@ -21,12 +21,12 @@ public class World {
 
 
     public World() {
-        loadFromFile("maps/map1.txt");
+        loadFromFile("maps/map2.txt");
 
         graph = new GridGraph(this);
         aStar = new AStar(graph);
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 2; i++) {
             Vector2 pos = getRandomFreeGrassTile();
             Agent agent = new Agent(pos.x, pos.y, getWidth(), getHeight());
             agents.add(agent);
@@ -37,14 +37,8 @@ public class World {
         for (Agent agent : agents) {
             agent.update(delta, agents, graph);
 
-            List<Node> obecnaLista = agent.getPath();
-            int pozostałoPunktów = obecnaLista.size();
-
             if (agent.hasNoPath()) {
-                int tx = (int)(Math.random() * getWidth());
-                int ty = (int)(Math.random() * getHeight());
-
-                List<Node> nowaTrasa = aStar.findPath((int)agent.getX(), (int)agent.getY(), tx, ty);
+                List<Node> nowaTrasa = findPath((int)agent.getX(), (int)agent.getY());
                 if (!nowaTrasa.isEmpty()) {
                     agent.setPath(nowaTrasa);
                 }
@@ -52,12 +46,8 @@ public class World {
             }
 
             if (agent.isInHalfPath()) {
-                Node ostatniPunkt = obecnaLista.get(pozostałoPunktów - 1);
-
-                int tx = (int)(Math.random() * getWidth());
-                int ty = (int)(Math.random() * getHeight());
-
-                List<Node> newPath = aStar.findPath(ostatniPunkt.getX(), ostatniPunkt.getY(), tx, ty);
+                Node lastNode = agent.getLastNode();
+                List<Node> newPath = findPath(lastNode.getX(), lastNode.getY());
 
                 if (!newPath.isEmpty()) {
                     newPath.remove(0);
@@ -130,6 +120,10 @@ public class World {
         }
     }
 
-
+    private List<Node> findPath(int startX, int startY) {
+        int tx = (int)(Math.random() * getWidth());
+        int ty = (int)(Math.random() * getHeight());
+        return aStar.findPath(startX , startY, tx, ty);
+    }
 
 }

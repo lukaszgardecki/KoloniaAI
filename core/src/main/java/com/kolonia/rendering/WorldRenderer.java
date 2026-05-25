@@ -27,7 +27,7 @@ public class WorldRenderer {
         this.camera = camera;
         this.batch = new SpriteBatch();
 
-        grass = new Texture("tiles/grass.png");
+        grass = new Texture("tiles/grass2.png");
         water = new Texture("tiles/water.png");
         rock = new Texture("tiles/rock.png");
         forest = new Texture("tiles/forest.png");

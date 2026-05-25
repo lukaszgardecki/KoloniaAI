@@ -1,8 +1,10 @@
 agent.png
 libgdx.png
 maps/map1.txt
+maps/map2.txt
 tiles/forest.png
 tiles/grass.png
+tiles/grass2.png
 tiles/rock.png
 tiles/wall.png
 tiles/water.png
