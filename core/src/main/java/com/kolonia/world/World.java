@@ -26,23 +26,43 @@ public class World {
         graph = new GridGraph(this);
         aStar = new AStar(graph);
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             Vector2 pos = getRandomFreeGrassTile();
-            agents.add(new Agent(pos.x, pos.y, getWidth(), getHeight()));
+            Agent agent = new Agent(pos.x, pos.y, getWidth(), getHeight());
+            agents.add(agent);
         }
-
-
     }
 
     public void update(float delta) {
-        for  (Agent agent : agents) {
-            agent.update(delta, agents);
+        for (Agent agent : agents) {
+            agent.update(delta, agents, graph);
 
-            if (agent.isPathFinished()) {
+            List<Node> obecnaLista = agent.getPath();
+            int pozostałoPunktów = obecnaLista.size();
+
+            if (agent.hasNoPath()) {
                 int tx = (int)(Math.random() * getWidth());
                 int ty = (int)(Math.random() * getHeight());
-                List<Node> newPath = aStar.findPath((int)agent.getX(), (int)agent.getY(), tx, ty);
-                agent.setPath(newPath);
+
+                List<Node> nowaTrasa = aStar.findPath((int)agent.getX(), (int)agent.getY(), tx, ty);
+                if (!nowaTrasa.isEmpty()) {
+                    agent.setPath(nowaTrasa);
+                }
+                continue;
+            }
+
+            if (agent.isInHalfPath()) {
+                Node ostatniPunkt = obecnaLista.get(pozostałoPunktów - 1);
+
+                int tx = (int)(Math.random() * getWidth());
+                int ty = (int)(Math.random() * getHeight());
+
+                List<Node> newPath = aStar.findPath(ostatniPunkt.getX(), ostatniPunkt.getY(), tx, ty);
+
+                if (!newPath.isEmpty()) {
+                    newPath.remove(0);
+                    agent.appendPath(newPath);
+                }
             }
         }
     }

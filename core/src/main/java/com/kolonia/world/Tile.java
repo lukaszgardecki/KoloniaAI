@@ -22,4 +22,8 @@ public class Tile {
     public TileType getType() {
         return type;
     }
+
+    public boolean isWalkable() {
+        return type.isWalkable();
+    }
 }

@@ -28,7 +28,7 @@ public class GridGraph {
     }
 
     public boolean isWalkable(int x, int y) {
-        return world.inBounds(x, y) && world.getTile(x, y).getType().isWalkable();
+        return world.inBounds(x, y) && world.getTile(x, y).isWalkable();
     }
 
     public List<Node> getNeighbors(Node node) {

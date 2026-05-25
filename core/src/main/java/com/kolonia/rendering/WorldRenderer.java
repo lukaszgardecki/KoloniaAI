@@ -18,6 +18,7 @@ public class WorldRenderer {
     private final Texture forest;
     private final Texture wall;
     private final AgentRenderer agentRenderer;
+    private final PathRenderer pathRenderer;
 
     public static final int TILE_SIZE = 16;
 
@@ -33,6 +34,7 @@ public class WorldRenderer {
         wall = new Texture("tiles/wall.png");
 
         agentRenderer = new AgentRenderer(batch);
+        pathRenderer = new PathRenderer();
     }
 
     public void render() {
@@ -61,5 +63,11 @@ public class WorldRenderer {
         }
 
         batch.end();
+
+
+
+        for (Agent a : world.getAgents()) {
+            pathRenderer.render(a.getPath(), a.getPathIndex(), camera.combined);
+        }
     }
 }
