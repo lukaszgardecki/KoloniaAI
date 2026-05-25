@@ -23,21 +23,19 @@ public class AgentRenderer {
         this.textureCache = new HashMap<>();
     }
 
-//    public AgentRenderer(SpriteBatch batch) {
-//        this.batch = batch;
-//
-//        Pixmap pixmap = new Pixmap(SIZE, SIZE, Pixmap.Format.RGBA8888);
-//        pixmap.setColor(Color.RED);
-//        pixmap.fill();
-//
-//        this.agentTexture = new Texture(pixmap);
-//
-////        this.agentTexture = new Texture("agent.png");
-//    }
+    public void render(Agent agent) {
+        int radiusInPixels = (int) agent.getSeparationRadius() * TILE_SIZE;
 
-//    public void render(Agent agent) {
-//        batch.draw(agentTexture, agent.getX() * SIZE, agent.getY() * SIZE);
-//    }
+        Texture texture = getOrCreateTexture(radiusInPixels);
+
+        int textureSize = texture.getWidth();
+        float offset = (textureSize - TILE_SIZE) / 2f;
+
+        float posX = (agent.getX() * TILE_SIZE) - offset;
+        float posY = (agent.getY() * TILE_SIZE) - offset;
+
+        batch.draw(texture, posX, posY);
+    }
 
     private Texture getOrCreateTexture(int radiusInPixels) {
         if (textureCache.containsKey(radiusInPixels)) {
@@ -64,19 +62,5 @@ public class AgentRenderer {
 
         textureCache.put(radiusInPixels, newTexture);
         return newTexture;
-    }
-
-    public void render(Agent agent) {
-        int radiusInPixels = (int) agent.getSeparationRadius() * TILE_SIZE;
-
-        Texture texture = getOrCreateTexture(radiusInPixels);
-
-        int textureSize = texture.getWidth();
-        float offset = (textureSize - TILE_SIZE) / 2f;
-
-        float posX = (agent.getX() * TILE_SIZE) - offset;
-        float posY = (agent.getY() * TILE_SIZE) - offset;
-
-        batch.draw(texture, posX, posY);
     }
 }
